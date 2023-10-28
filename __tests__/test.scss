@@ -1,0 +1,22 @@
+@use "sass:math";
+
+@import "true";
+@import "../src/modularscale";
+
+@include test-module("Test ms functions:") {
+  @include test("Single base") {
+    $base: 16px !global;
+    $ratio: 1.5 !global;
+
+    // https://www.modularscale.com/?16&px&1.5
+    @include assert-equal(ms(4), 81px);
+    @include assert-equal(ms(3), 54px);
+    @include assert-equal(ms(2), 36px);
+    @include assert-equal(ms(1), 24px);
+    @include assert-equal(ms(0), 16px);
+    @include assert-equal(ms(-1), 10.667px);
+    @include assert-equal(ms(-2), 7.111px);
+    @include assert-equal(ms(-3), 4.741px);
+    @include assert-equal(ms(-4), 3.16px);
+  }
+}

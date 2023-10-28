@@ -1,0 +1,50 @@
+{
+  "name": "modularscale-sass",
+  "version": "0.0.0",
+  "description": "",
+  "main": "./src/modularscale.scss",
+  "scripts": {
+    "lint": "stylelint src/modularscale.scss",
+    "test": "jest --silent",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/P233/modularscale-sass.git"
+  },
+  "keywords": [
+    "sass",
+    "scss",
+    "modularscale",
+    "typography"
+  ],
+  "author": "Peiwen Lu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/P233/modularscale-sass/issues"
+  },
+  "homepage": "https://github.com/P233/modularscale-sass#readme",
+  "devDependencies": {
+    "@p233/stylelint-config-scss": "^4.0.1",
+    "husky": "^8.0.3",
+    "jest": "^29.7.0",
+    "lint-staged": "^15.0.2",
+    "postcss": "^8.4.31",
+    "prettier": "^3.0.3",
+    "sass": "^1.69.5",
+    "sass-true": "^7.0.0",
+    "stylelint": "^15.11.0"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "lint-staged": {
+    "*.scss": [
+      "prettier --write",
+      "stylelint --fix"
+    ]
+  },
+  "files": [
+    "src"
+  ]
+}

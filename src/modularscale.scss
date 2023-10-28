@@ -1,0 +1,20 @@
+@use "sass:math";
+
+$base: 16px !default;
+$ratio: 1.5 !default;
+
+@function _modularscale($n) {
+  @if $n > 0 {
+    @return $base * math.pow($ratio, $n);
+  }
+
+  @if $n < 0 {
+    @return math.div($base, math.pow($ratio, math.abs($n)));
+  }
+
+  @return $base;
+}
+
+@function ms($n) {
+  @return math.div(math.round(_modularscale($n) * 1000), 1000);
+}
