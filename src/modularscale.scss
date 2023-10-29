@@ -1,18 +1,71 @@
+@use "sass:list";
 @use "sass:math";
+@use "sass:meta";
 
 $base: 16px !default;
 $ratio: 1.5 !default;
 
+@function _insert($list, $value) {
+  $last-value: list.nth($list, -1);
+
+  @if $value > $last-value {
+    @return list.append($list, $value);
+  } @else {
+    $_list: ($value);
+    @each $v in $list {
+      $_list: _insert($_list, $v);
+    }
+    @return $_list;
+  }
+}
+
+@function _normalize($base-list) {
+  $_0-base: list.nth($base-list, 1);
+  $_base-list: [$_0-base];
+
+  @for $i from 2 through list.length($base-list) {
+    $_base: list.nth($base-list, $i);
+
+    @if $_base > $_0-base {
+      @while ($_base > $_0-base) {
+        $_base: math.div($_base, $ratio);
+      }
+      $_base: $_base * $ratio;
+    } @else if $_base < $_0-base {
+      @while $_base < $_0-base {
+        $_base: $_base * $ratio;
+      }
+    }
+
+    $_base-list: _insert($_base-list, $_base);
+  }
+
+  @return $_base-list;
+}
+
 @function _modularscale($n) {
-  @if $n > 0 {
-    @return $base * math.pow($ratio, $n);
+  $base-type: meta.type-of($base);
+
+  @if $base-type == number {
+    @if $n > 0 {
+      @return $base * math.pow($ratio, $n);
+    } @else if $n < 0 {
+      @return math.div($base, math.pow($ratio, math.abs($n)));
+    } @else {
+      @return $base;
+    }
   }
 
-  @if $n < 0 {
-    @return math.div($base, math.pow($ratio, math.abs($n)));
+  @if $base-type == list {
+    $normalized-base-list: _normalize($base);
+    $base-list-length: list.length($normalized-base-list);
+    $step: math.floor(math.div($n, $base-list-length));
+    $target-base-index: math.round((math.div($n, $base-list-length) - $step) * $base-list-length) + 1;
+
+    @return math.pow($ratio, $step) * list.nth($normalized-base-list, $target-base-index);
   }
 
-  @return $base;
+  @error "Invalid $base value: #{meta.inspect($base)}. The value should be a number or a list of numbers.";
 }
 
 @function ms($n) {
