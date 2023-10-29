@@ -50,7 +50,7 @@ $default-ratio: 1.5 !default;
 
 // modularscale calculator
 // https://github.com/modularscale/modularscale-sass/blob/3.x/stylesheets/modularscale/_function.scss
-@function _modularscale($base, $ratio, $n) {
+@function ms($n, $base: $default-base, $ratio: $default-ratio) {
   $base-type: meta.type-of($base);
 
   @if $base-type == number {
@@ -73,12 +73,4 @@ $default-ratio: 1.5 !default;
   }
 
   @error "Invalid $base value: #{meta.inspect($base)}. The value should be a number or a list of numbers.";
-}
-
-// shorthand for the _modularscale function
-@function ms($n, $base: null, $ratio: null) {
-  $base: if($base, $base, $default-base);
-  $ratio: if($ratio, $ratio, $default-ratio);
-
-  @return _modularscale($base, $ratio, $n);
 }
