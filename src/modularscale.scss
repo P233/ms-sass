@@ -69,5 +69,5 @@ $ratio: 1.5 !default;
 }
 
 @function ms($n) {
-  @return math.div(math.round(_modularscale($n) * 1000), 1000);
+  @return _modularscale($n);
 }

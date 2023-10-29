@@ -3,6 +3,11 @@
 @import "true";
 @import "../src/modularscale";
 
+// Round ms function result to 3 decimal places for testing.
+@function _ms($n) {
+  @return math.div(math.round(ms($n) * 1000), 1000);
+}
+
 @include test-module("Test insert functions:") {
   @include test("Large insert value") {
     @include assert-equal(_insert((1), 9), (1 9));
@@ -26,29 +31,29 @@
     $ratio: 1.5 !global;
 
     // https://www.modularscale.com/?16&px&1.5
-    @include assert-equal(ms(16), 10509.453px);
-    @include assert-equal(ms(15), 7006.302px);
-    @include assert-equal(ms(14), 4670.868px);
-    @include assert-equal(ms(13), 3113.912px);
-    @include assert-equal(ms(12), 2075.941px);
-    @include assert-equal(ms(11), 1383.961px);
-    @include assert-equal(ms(10), 922.641px);
-    @include assert-equal(ms(9), 615.094px);
-    @include assert-equal(ms(8), 410.063px);
-    @include assert-equal(ms(7), 273.375px);
-    @include assert-equal(ms(6), 182.25px);
-    @include assert-equal(ms(5), 121.5px);
-    @include assert-equal(ms(4), 81px);
-    @include assert-equal(ms(3), 54px);
-    @include assert-equal(ms(2), 36px);
-    @include assert-equal(ms(1), 24px);
-    @include assert-equal(ms(0), 16px);
-    @include assert-equal(ms(-1), 10.667px);
-    @include assert-equal(ms(-2), 7.111px);
-    @include assert-equal(ms(-3), 4.741px);
-    @include assert-equal(ms(-4), 3.16px);
-    @include assert-equal(ms(-5), 2.107px);
-    @include assert-equal(ms(-6), 1.405px);
+    @include assert-equal(_ms(16), 10509.453px);
+    @include assert-equal(_ms(15), 7006.302px);
+    @include assert-equal(_ms(14), 4670.868px);
+    @include assert-equal(_ms(13), 3113.912px);
+    @include assert-equal(_ms(12), 2075.941px);
+    @include assert-equal(_ms(11), 1383.961px);
+    @include assert-equal(_ms(10), 922.641px);
+    @include assert-equal(_ms(9), 615.094px);
+    @include assert-equal(_ms(8), 410.063px);
+    @include assert-equal(_ms(7), 273.375px);
+    @include assert-equal(_ms(6), 182.25px);
+    @include assert-equal(_ms(5), 121.5px);
+    @include assert-equal(_ms(4), 81px);
+    @include assert-equal(_ms(3), 54px);
+    @include assert-equal(_ms(2), 36px);
+    @include assert-equal(_ms(1), 24px);
+    @include assert-equal(_ms(0), 16px);
+    @include assert-equal(_ms(-1), 10.667px);
+    @include assert-equal(_ms(-2), 7.111px);
+    @include assert-equal(_ms(-3), 4.741px);
+    @include assert-equal(_ms(-4), 3.16px);
+    @include assert-equal(_ms(-5), 2.107px);
+    @include assert-equal(_ms(-6), 1.405px);
   }
 
   @include test("Single base use em unit") {
@@ -56,29 +61,29 @@
     $ratio: 1.5 !global;
 
     // https://www.modularscale.com/?1&em&1.5
-    @include assert-equal(ms(16), 656.841em);
-    @include assert-equal(ms(15), 437.894em);
-    @include assert-equal(ms(14), 291.929em);
-    @include assert-equal(ms(13), 194.62em);
-    @include assert-equal(ms(12), 129.746em);
-    @include assert-equal(ms(11), 86.498em);
-    @include assert-equal(ms(10), 57.665em);
-    @include assert-equal(ms(9), 38.443em);
-    @include assert-equal(ms(8), 25.629em);
-    @include assert-equal(ms(7), 17.086em);
-    @include assert-equal(ms(6), 11.391em);
-    @include assert-equal(ms(5), 7.594em);
-    @include assert-equal(ms(4), 5.063em);
-    @include assert-equal(ms(3), 3.375em);
-    @include assert-equal(ms(2), 2.25em);
-    @include assert-equal(ms(1), 1.5em);
-    @include assert-equal(ms(0), 1em);
-    @include assert-equal(ms(-1), 0.667em);
-    @include assert-equal(ms(-2), 0.444em);
-    @include assert-equal(ms(-3), 0.296em);
-    @include assert-equal(ms(-4), 0.198em);
-    @include assert-equal(ms(-5), 0.132em);
-    @include assert-equal(ms(-6), 0.088em);
+    @include assert-equal(_ms(16), 656.841em);
+    @include assert-equal(_ms(15), 437.894em);
+    @include assert-equal(_ms(14), 291.929em);
+    @include assert-equal(_ms(13), 194.62em);
+    @include assert-equal(_ms(12), 129.746em);
+    @include assert-equal(_ms(11), 86.498em);
+    @include assert-equal(_ms(10), 57.665em);
+    @include assert-equal(_ms(9), 38.443em);
+    @include assert-equal(_ms(8), 25.629em);
+    @include assert-equal(_ms(7), 17.086em);
+    @include assert-equal(_ms(6), 11.391em);
+    @include assert-equal(_ms(5), 7.594em);
+    @include assert-equal(_ms(4), 5.063em);
+    @include assert-equal(_ms(3), 3.375em);
+    @include assert-equal(_ms(2), 2.25em);
+    @include assert-equal(_ms(1), 1.5em);
+    @include assert-equal(_ms(0), 1em);
+    @include assert-equal(_ms(-1), 0.667em);
+    @include assert-equal(_ms(-2), 0.444em);
+    @include assert-equal(_ms(-3), 0.296em);
+    @include assert-equal(_ms(-4), 0.198em);
+    @include assert-equal(_ms(-5), 0.132em);
+    @include assert-equal(_ms(-6), 0.088em);
   }
 
   @include test("Two bases in asc order") {
@@ -86,29 +91,29 @@
     $ratio: 1.5 !global;
 
     // https://www.modularscale.com/?16,20&px&1.5
-    @include assert-equal(ms(16), 410.063px);
-    @include assert-equal(ms(15), 341.719px);
-    @include assert-equal(ms(14), 273.375px);
-    @include assert-equal(ms(13), 227.813px);
-    @include assert-equal(ms(12), 182.25px);
-    @include assert-equal(ms(11), 151.875px);
-    @include assert-equal(ms(10), 121.5px);
-    @include assert-equal(ms(9), 101.25px);
-    @include assert-equal(ms(8), 81px);
-    @include assert-equal(ms(7), 67.5px);
-    @include assert-equal(ms(6), 54px);
-    @include assert-equal(ms(5), 45px);
-    @include assert-equal(ms(4), 36px);
-    @include assert-equal(ms(3), 30px);
-    @include assert-equal(ms(2), 24px);
-    @include assert-equal(ms(1), 20px);
-    @include assert-equal(ms(0), 16px);
-    @include assert-equal(ms(-1), 13.333px);
-    @include assert-equal(ms(-2), 10.667px);
-    @include assert-equal(ms(-3), 8.889px);
-    @include assert-equal(ms(-4), 7.111px);
-    @include assert-equal(ms(-5), 5.926px);
-    @include assert-equal(ms(-6), 4.741px);
+    @include assert-equal(_ms(16), 410.063px);
+    @include assert-equal(_ms(15), 341.719px);
+    @include assert-equal(_ms(14), 273.375px);
+    @include assert-equal(_ms(13), 227.813px);
+    @include assert-equal(_ms(12), 182.25px);
+    @include assert-equal(_ms(11), 151.875px);
+    @include assert-equal(_ms(10), 121.5px);
+    @include assert-equal(_ms(9), 101.25px);
+    @include assert-equal(_ms(8), 81px);
+    @include assert-equal(_ms(7), 67.5px);
+    @include assert-equal(_ms(6), 54px);
+    @include assert-equal(_ms(5), 45px);
+    @include assert-equal(_ms(4), 36px);
+    @include assert-equal(_ms(3), 30px);
+    @include assert-equal(_ms(2), 24px);
+    @include assert-equal(_ms(1), 20px);
+    @include assert-equal(_ms(0), 16px);
+    @include assert-equal(_ms(-1), 13.333px);
+    @include assert-equal(_ms(-2), 10.667px);
+    @include assert-equal(_ms(-3), 8.889px);
+    @include assert-equal(_ms(-4), 7.111px);
+    @include assert-equal(_ms(-5), 5.926px);
+    @include assert-equal(_ms(-6), 4.741px);
   }
 
   @include test("Two bases in desc order") {
@@ -116,29 +121,29 @@
     $ratio: 1.25 !global;
 
     // https://www.modularscale.com/?1.5,1&em&1.25
-    @include assert-equal(ms(16), 8.941em);
-    @include assert-equal(ms(15), 7.451em);
-    @include assert-equal(ms(14), 7.153em);
-    @include assert-equal(ms(13), 5.96em);
-    @include assert-equal(ms(12), 5.722em);
-    @include assert-equal(ms(11), 4.768em);
-    @include assert-equal(ms(10), 4.578em);
-    @include assert-equal(ms(9), 3.815em);
-    @include assert-equal(ms(8), 3.662em);
-    @include assert-equal(ms(7), 3.052em);
-    @include assert-equal(ms(6), 2.93em);
-    @include assert-equal(ms(5), 2.441em);
-    @include assert-equal(ms(4), 2.344em);
-    @include assert-equal(ms(3), 1.953em);
-    @include assert-equal(ms(2), 1.875em);
-    @include assert-equal(ms(1), 1.563em);
-    @include assert-equal(ms(0), 1.5em);
-    @include assert-equal(ms(-1), 1.25em);
-    @include assert-equal(ms(-2), 1.2em);
-    @include assert-equal(ms(-3), 1em);
-    @include assert-equal(ms(-4), 0.96em);
-    @include assert-equal(ms(-5), 0.8em);
-    @include assert-equal(ms(-6), 0.768em);
+    @include assert-equal(_ms(16), 8.941em);
+    @include assert-equal(_ms(15), 7.451em);
+    @include assert-equal(_ms(14), 7.153em);
+    @include assert-equal(_ms(13), 5.96em);
+    @include assert-equal(_ms(12), 5.722em);
+    @include assert-equal(_ms(11), 4.768em);
+    @include assert-equal(_ms(10), 4.578em);
+    @include assert-equal(_ms(9), 3.815em);
+    @include assert-equal(_ms(8), 3.662em);
+    @include assert-equal(_ms(7), 3.052em);
+    @include assert-equal(_ms(6), 2.93em);
+    @include assert-equal(_ms(5), 2.441em);
+    @include assert-equal(_ms(4), 2.344em);
+    @include assert-equal(_ms(3), 1.953em);
+    @include assert-equal(_ms(2), 1.875em);
+    @include assert-equal(_ms(1), 1.563em);
+    @include assert-equal(_ms(0), 1.5em);
+    @include assert-equal(_ms(-1), 1.25em);
+    @include assert-equal(_ms(-2), 1.2em);
+    @include assert-equal(_ms(-3), 1em);
+    @include assert-equal(_ms(-4), 0.96em);
+    @include assert-equal(_ms(-5), 0.8em);
+    @include assert-equal(_ms(-6), 0.768em);
   }
 
   @include test("Three bases") {
@@ -146,29 +151,29 @@
     $ratio: 1.067 !global;
 
     // https://www.modularscale.com/?17,23,19&px&1.067
-    @include assert-equal(ms(16), 24.541px);
-    @include assert-equal(ms(15), 23.511px);
-    @include assert-equal(ms(14), 23.081px);
-    @include assert-equal(ms(13), 23px);
-    @include assert-equal(ms(12), 22.035px);
-    @include assert-equal(ms(11), 21.631px);
-    @include assert-equal(ms(10), 21.556px);
-    @include assert-equal(ms(9), 20.651px);
-    @include assert-equal(ms(8), 20.273px);
-    @include assert-equal(ms(7), 20.202px);
-    @include assert-equal(ms(6), 19.354px);
-    @include assert-equal(ms(5), 19px);
-    @include assert-equal(ms(4), 18.934px);
-    @include assert-equal(ms(3), 18.139px);
-    @include assert-equal(ms(2), 17.807px);
-    @include assert-equal(ms(1), 17.745px);
-    @include assert-equal(ms(0), 17px);
-    @include assert-equal(ms(-1), 16.689px);
-    @include assert-equal(ms(-2), 16.631px);
-    @include assert-equal(ms(-3), 15.933px);
-    @include assert-equal(ms(-4), 15.641px);
-    @include assert-equal(ms(-5), 15.586px);
-    @include assert-equal(ms(-6), 14.932px);
+    @include assert-equal(_ms(16), 24.541px);
+    @include assert-equal(_ms(15), 23.511px);
+    @include assert-equal(_ms(14), 23.081px);
+    @include assert-equal(_ms(13), 23px);
+    @include assert-equal(_ms(12), 22.035px);
+    @include assert-equal(_ms(11), 21.631px);
+    @include assert-equal(_ms(10), 21.556px);
+    @include assert-equal(_ms(9), 20.651px);
+    @include assert-equal(_ms(8), 20.273px);
+    @include assert-equal(_ms(7), 20.202px);
+    @include assert-equal(_ms(6), 19.354px);
+    @include assert-equal(_ms(5), 19px);
+    @include assert-equal(_ms(4), 18.934px);
+    @include assert-equal(_ms(3), 18.139px);
+    @include assert-equal(_ms(2), 17.807px);
+    @include assert-equal(_ms(1), 17.745px);
+    @include assert-equal(_ms(0), 17px);
+    @include assert-equal(_ms(-1), 16.689px);
+    @include assert-equal(_ms(-2), 16.631px);
+    @include assert-equal(_ms(-3), 15.933px);
+    @include assert-equal(_ms(-4), 15.641px);
+    @include assert-equal(_ms(-5), 15.586px);
+    @include assert-equal(_ms(-6), 14.932px);
   }
 
   @include test("Four bases") {
@@ -176,28 +181,28 @@
     $ratio: 1.333 !global;
 
     // https://www.modularscale.com/?2,1.25,1&em&1.333
-    @include assert-equal(ms(16), 9.348em);
-    @include assert-equal(ms(15), 8.417em);
-    @include assert-equal(ms(14), 7.478em);
-    @include assert-equal(ms(13), 7.013em);
-    @include assert-equal(ms(12), 6.315em);
-    @include assert-equal(ms(11), 5.61em);
-    @include assert-equal(ms(10), 5.261em);
-    @include assert-equal(ms(9), 4.737em);
-    @include assert-equal(ms(8), 4.209em);
-    @include assert-equal(ms(7), 3.947em);
-    @include assert-equal(ms(6), 3.554em);
-    @include assert-equal(ms(5), 3.157em);
-    @include assert-equal(ms(4), 2.961em);
-    @include assert-equal(ms(3), 2.666em);
-    @include assert-equal(ms(2), 2.369em);
-    @include assert-equal(ms(1), 2.221em);
-    @include assert-equal(ms(0), 2em);
-    @include assert-equal(ms(-1), 1.777em);
-    @include assert-equal(ms(-2), 1.666em);
-    @include assert-equal(ms(-3), 1.5em);
-    @include assert-equal(ms(-4), 1.333em);
-    @include assert-equal(ms(-5), 1.25em);
-    @include assert-equal(ms(-6), 1.126em);
+    @include assert-equal(_ms(16), 9.348em);
+    @include assert-equal(_ms(15), 8.417em);
+    @include assert-equal(_ms(14), 7.478em);
+    @include assert-equal(_ms(13), 7.013em);
+    @include assert-equal(_ms(12), 6.315em);
+    @include assert-equal(_ms(11), 5.61em);
+    @include assert-equal(_ms(10), 5.261em);
+    @include assert-equal(_ms(9), 4.737em);
+    @include assert-equal(_ms(8), 4.209em);
+    @include assert-equal(_ms(7), 3.947em);
+    @include assert-equal(_ms(6), 3.554em);
+    @include assert-equal(_ms(5), 3.157em);
+    @include assert-equal(_ms(4), 2.961em);
+    @include assert-equal(_ms(3), 2.666em);
+    @include assert-equal(_ms(2), 2.369em);
+    @include assert-equal(_ms(1), 2.221em);
+    @include assert-equal(_ms(0), 2em);
+    @include assert-equal(_ms(-1), 1.777em);
+    @include assert-equal(_ms(-2), 1.666em);
+    @include assert-equal(_ms(-3), 1.5em);
+    @include assert-equal(_ms(-4), 1.333em);
+    @include assert-equal(_ms(-5), 1.25em);
+    @include assert-equal(_ms(-6), 1.126em);
   }
 }
