@@ -1,5 +1,5 @@
 {
-  "name": "modularscale-sass",
+  "name": "ms-sass",
   "version": "0.0.0",
   "description": "",
   "main": "./src/modularscale.scss",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/P233/modularscale-sass.git"
+    "url": "git+https://github.com/P233/ms-sass.git"
   },
   "keywords": [
     "sass",
@@ -21,9 +21,9 @@
   "author": "Peiwen Lu",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/P233/modularscale-sass/issues"
+    "url": "https://github.com/P233/ms-sass/issues"
   },
-  "homepage": "https://github.com/P233/modularscale-sass#readme",
+  "homepage": "https://github.com/P233/ms-sass#readme",
   "devDependencies": {
     "@p233/stylelint-config-scss": "^4.0.1",
     "husky": "^8.0.3",
