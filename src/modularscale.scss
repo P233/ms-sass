@@ -3,9 +3,11 @@
 @use "sass:math";
 @use "sass:meta";
 
+// default base and ratio
 $default-base: 16px !default;
 $default-ratio: 1.5 !default;
 
+// insert $value into $list in ascending order
 @function _insert($list, $value) {
   $last-value: list.nth($list, -1);
 
@@ -20,6 +22,8 @@ $default-ratio: 1.5 !default;
   }
 }
 
+// normalize base list
+// https://github.com/modularscale/modularscale-sass/blob/3.x/stylesheets/modularscale/_function.scss#L21
 @function _normalize($base-list, $ratio) {
   $_0-base: list.nth($base-list, 1);
   $_base-list: [$_0-base];
@@ -44,6 +48,8 @@ $default-ratio: 1.5 !default;
   @return $_base-list;
 }
 
+// modularscale calculator
+// https://github.com/modularscale/modularscale-sass/blob/3.x/stylesheets/modularscale/_function.scss
 @function _modularscale($base, $ratio, $n) {
   $base-type: meta.type-of($base);
 
@@ -69,6 +75,7 @@ $default-ratio: 1.5 !default;
   @error "Invalid $base value: #{meta.inspect($base)}. The value should be a number or a list of numbers.";
 }
 
+// shorthand for the _modularscale function
 @function ms($n, $base: null, $ratio: null) {
   $base: if($base, $base, $default-base);
   $ratio: if($ratio, $ratio, $default-ratio);
