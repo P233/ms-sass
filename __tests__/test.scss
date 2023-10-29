@@ -3,9 +3,12 @@
 @import "true";
 @import "../src/modularscale";
 
-// Round ms function result to 3 decimal places for testing.
+@function _roundTo3DecimalPlaces($number) {
+  @return math.div(math.round($number * 1000), 1000);
+}
+
 @function _ms($n) {
-  @return math.div(math.round(ms($n) * 1000), 1000);
+  @return _roundTo3DecimalPlaces(ms($n));
 }
 
 @include test-module("Test insert functions:") {
@@ -27,8 +30,8 @@
 
 @include test-module("Test ms functions:") {
   @include test("Single base use px unit") {
-    $base: 16px !global;
-    $ratio: 1.5 !global;
+    $default-base: 16px !global;
+    $default-ratio: 1.5 !global;
 
     // https://www.modularscale.com/?16&px&1.5
     @include assert-equal(_ms(16), 10509.453px);
@@ -57,8 +60,8 @@
   }
 
   @include test("Single base use em unit") {
-    $base: 1em !global;
-    $ratio: 1.5 !global;
+    $default-base: 1em !global;
+    $default-ratio: 1.5 !global;
 
     // https://www.modularscale.com/?1&em&1.5
     @include assert-equal(_ms(16), 656.841em);
@@ -87,8 +90,8 @@
   }
 
   @include test("Two bases in asc order") {
-    $base: 16px 20px !global;
-    $ratio: 1.5 !global;
+    $default-base: 16px 20px !global;
+    $default-ratio: 1.5 !global;
 
     // https://www.modularscale.com/?16,20&px&1.5
     @include assert-equal(_ms(16), 410.063px);
@@ -117,8 +120,8 @@
   }
 
   @include test("Two bases in desc order") {
-    $base: 1.5em 1em !global;
-    $ratio: 1.25 !global;
+    $default-base: 1.5em 1em !global;
+    $default-ratio: 1.25 !global;
 
     // https://www.modularscale.com/?1.5,1&em&1.25
     @include assert-equal(_ms(16), 8.941em);
@@ -147,8 +150,8 @@
   }
 
   @include test("Three bases") {
-    $base: 17px 23px 19px !global;
-    $ratio: 1.067 !global;
+    $default-base: 17px 23px 19px !global;
+    $default-ratio: 1.067 !global;
 
     // https://www.modularscale.com/?17,23,19&px&1.067
     @include assert-equal(_ms(16), 24.541px);
@@ -177,8 +180,8 @@
   }
 
   @include test("Four bases") {
-    $base: 2em 1.25em 1em !global;
-    $ratio: 1.333 !global;
+    $default-base: 2em 1.25em 1em !global;
+    $default-ratio: 1.333 !global;
 
     // https://www.modularscale.com/?2,1.25,1&em&1.333
     @include assert-equal(_ms(16), 9.348em);
@@ -204,5 +207,27 @@
     @include assert-equal(_ms(-4), 1.333em);
     @include assert-equal(_ms(-5), 1.25em);
     @include assert-equal(_ms(-6), 1.126em);
+  }
+
+  @include test("Custom ratio") {
+    $default-base: 16px !global;
+
+    @include assert-equal(_roundTo3DecimalPlaces(ms(2, $ratio: 4)), 256px);
+    @include assert-equal(_roundTo3DecimalPlaces(ms(1, $ratio: 3)), 48px);
+    @include assert-equal(_roundTo3DecimalPlaces(ms(-6, $ratio: 2.667)), 0.044px);
+  }
+
+  @include test("Custom base") {
+    $default-ratio: 1.778 !global;
+
+    @include assert-equal(_roundTo3DecimalPlaces(ms(2, $base: 16px)), 50.581px);
+    @include assert-equal(_roundTo3DecimalPlaces(ms(13, $base: 1.25em)), 2218.313em);
+    @include assert-equal(_roundTo3DecimalPlaces(ms(-6, $base: 18px)), 0.57px);
+  }
+
+  @include test("Custom base and ratio") {
+    @include assert-equal(_roundTo3DecimalPlaces(ms(2, $base: 32px, $ratio: 1.6)), 81.92px);
+    @include assert-equal(_roundTo3DecimalPlaces(ms(2, $ratio: 1.6, $base: 32px)), 81.92px);
+    @include assert-equal(_roundTo3DecimalPlaces(ms(2, 32px, 1.6)), 81.92px);
   }
 }

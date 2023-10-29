@@ -1,9 +1,10 @@
 @use "sass:list";
+@use "sass:map";
 @use "sass:math";
 @use "sass:meta";
 
-$base: 16px !default;
-$ratio: 1.5 !default;
+$default-base: 16px !default;
+$default-ratio: 1.5 !default;
 
 @function _insert($list, $value) {
   $last-value: list.nth($list, -1);
@@ -19,7 +20,7 @@ $ratio: 1.5 !default;
   }
 }
 
-@function _normalize($base-list) {
+@function _normalize($base-list, $ratio) {
   $_0-base: list.nth($base-list, 1);
   $_base-list: [$_0-base];
 
@@ -43,7 +44,7 @@ $ratio: 1.5 !default;
   @return $_base-list;
 }
 
-@function _modularscale($n) {
+@function _modularscale($base, $ratio, $n) {
   $base-type: meta.type-of($base);
 
   @if $base-type == number {
@@ -57,7 +58,7 @@ $ratio: 1.5 !default;
   }
 
   @if $base-type == list {
-    $normalized-base-list: _normalize($base);
+    $normalized-base-list: _normalize($base, $ratio);
     $base-list-length: list.length($normalized-base-list);
     $step: math.floor(math.div($n, $base-list-length));
     $target-base-index: math.round((math.div($n, $base-list-length) - $step) * $base-list-length) + 1;
@@ -68,6 +69,9 @@ $ratio: 1.5 !default;
   @error "Invalid $base value: #{meta.inspect($base)}. The value should be a number or a list of numbers.";
 }
 
-@function ms($n) {
-  @return _modularscale($n);
+@function ms($n, $base: null, $ratio: null) {
+  $base: if($base, $base, $default-base);
+  $ratio: if($ratio, $ratio, $default-ratio);
+
+  @return _modularscale($base, $ratio, $n);
 }
