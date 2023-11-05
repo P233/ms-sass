@@ -1,7 +1,7 @@
 {
   "name": "ms-sass",
   "version": "1.0.0",
-  "description": "",
+  "description": "A lite dart-sass implementation for modularscale-sass.",
   "main": "./src/modularscale.scss",
   "scripts": {
     "lint": "stylelint src/modularscale.scss",
