@@ -42,7 +42,7 @@ Alternatively, you can `@use` this package with configurations in the sass-loade
 
 Only the `ms` function has been implemented, and it differs slightly.
 
-```scss
+```
 ms($n, [$base], [$ratio])
 ```
 
